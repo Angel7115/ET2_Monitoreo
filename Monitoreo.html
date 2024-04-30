@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <title>Monitoreo</title>
+  <style>
+    /* Estilos personalizados aquí */
+    .device-container {
+      position: relative;
+    }
+    .device-image {
+      position: absolute;
+      z-index: 1; /* Asegura que las imágenes de los dispositivos estén encima de la imagen "PlanoCasa" */
+    }
+    /* Ajustar las posiciones de las imágenes */
+    #plano-casa {
+      position: relative; /* Ajustar para que otras imágenes puedan posicionarse relativas a esta */
+      z-index: 0; /* Coloca la imagen "PlanoCasa" detrás de las imágenes de los dispositivos */
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Monitoreo</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#deteccion">Detección</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://662f708a43b6a7dce30f7eff.mockapi.io/ordenCasa" target="_blank">MockAPI</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1 class="mt-2">Monitoreo</h1>
+    <p>Haz clic en el botón para obtener la última instrucción:</p>
+    <button id="fetch-instruction-btn" class="btn btn-primary">Obtener Instrucción</button>
+    <div id="instruction-container" class="mt-2"></div>
+  </div>
+
+  <div class="container mt-5 device-container">
+    <img id="plano-casa" src="img/PlanoCasa.jpg" alt="Plano de la Casa" style="max-width: 100%;">
+
+    <!-- Imágenes de los dispositivos -->
+    <img id="jardin-luz-image" src="img/gardenlamp_OFF.png" alt="Luces del jardín" class="device-image gardenlamp-image" style="max-width: 60px; top: 80px; left: 100px;">
+    <img id="jardin-luz-image" src="img/gardenlamp_OFF.png" alt="Luces del jardín" class="device-image gardenlamp-image" style="max-width: 60px; top: 80px; left: 250px;">
+    <img id="jardin-luz-image" src="img/gardenlamp_OFF.png" alt="Luces del jardín" class="device-image gardenlamp-image" style="max-width: 60px; top: 80px; left: 400px;">
+    <img id="jardin-luz-image" src="img/gardenlamp_OFF.png" alt="Luces del jardín" class="device-image gardenlamp-image" style="max-width: 60px; top: 80px; left: 550px;">
+    <img id="jardin-luz-image" src="img/gardenlamp_OFF.png" alt="Luces del jardín" class="device-image gardenlamp-image" style="max-width: 60px; top: 80px; left: 700px;">
+
+    <img id="ventilador-image" src="img/ventiladorOFF.png" alt="Ventilador" class="device-image ventilador-image" style="max-width: 150px; top: 400px; left: 480px;">
+
+    <img id="recamara-luz-image" src="img/Foco_OFF.png" alt="Luz de recámara" class="device-image recamara-luz-image" style="max-width: 60px; top: 500px; left: 750px;">
+
+    <img id="sala-luz-image" src="img/Foco_OFF.png" alt="Luz de sala" class="device-image sala-luz-image" style="max-width: 60px; top: 500px; left: 300px;">
+
+    <img id="cortinas-image" src="img/CortinasCLOSE.png" alt="Cortinas" class="device-image cortinas-image" style="max-width: 65px; top: 540px; left: 850px;"> <!-- DER inferior -->
+    <img id="cortinas-image" src="img/CortinasCLOSE.png" alt="Cortinas" class="device-image cortinas-image" style="max-width: 60px; top: 240px; left: 520px;">
+    <img id="cortinas-image" src="img/CortinasCLOSE.png" alt="Cortinas" class="device-image cortinas-image" style="max-width: 60px; top: 240px; left: 760px;">
+
+    <img id="alarma-image" src="img/Alarma_OFF.png" alt="Alarma" class="device-image alarma-image" style="max-width: 30px; top: 600px; left: 600px;">
+    <img id="camaras-image" src="img/Camaras_OFF.png" alt="Cámaras de seguridad" class="device-image camaras-image" style="max-width: 200px; top: 15px; left: 720px;">
+    <img id="camaras-image" src="img/Camaras_OFF.png" alt="Cámaras de seguridad" class="device-image camaras-image" style="max-width: 200px; top: 200px; left: 240px;">
+    <img id="camaras-image" src="img/Camaras_OFF.png" alt="Cámaras de seguridad" class="device-image camaras-image" style="max-width: 200px; top: 220px; left: 700px;">
+  </div>
+
+  <footer class="footer mt-auto py-3 bg-dark text-white">
+    <div class="container text-center">
+      <span class="text-muted">Alvarez Melo Angel Jafet, IHC, Todos los derechos reservados &copy; 2024</span>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script>
+    document.getElementById('fetch-instruction-btn').addEventListener('click', function() {
+      fetchLatestInstruction();
+    });
+
+    function fetchLatestInstruction() {
+      fetch('https://662f708a43b6a7dce30f7eff.mockapi.io/ordenCasa')
+        .then(response => response.json())
+        .then(data => {
+          if (data.length > 0) {
+            const latestInstruction = data[data.length - 1];
+            displayInstruction(latestInstruction);
+            actualizarDispositivosSegunOrden(latestInstruction.orden);
+          } else {
+            document.getElementById('instruction-container').innerHTML = '<p>No hay instrucciones disponibles.</p>';
+          }
+        })
+        .catch(error => console.error('Error al obtener la última instrucción:', error));
+    }
+
+    function displayInstruction(instruction) {
+      const instructionHTML = `
+        <div>
+          <h3>Última Instrucción:</h3>
+          <p>Orden: ${instruction.orden}</p>
+          <p>Usuario: ${instruction.usuario}</p>
+          <p>Fecha: ${instruction.fecha}</p>
+          <p>Hora: ${instruction.hora}</p>
+        </div>
+      `;
+      document.getElementById('instruction-container').innerHTML = instructionHTML;
+    }
+
+    function actualizarDispositivosSegunOrden(orden) {
+      const deviceKeywords = {
+        'enciende el ventilador': {
+          command: 'img/ventiladorON.gif',
+          className: 'ventilador-image'
+        },
+        'apaga el ventilador': {
+          command: 'img/ventiladorOFF.png',
+          className: 'ventilador-image'
+        },
+        'enciende la luz de la recámara': {
+          command: 'img/Foco_ON.png',
+          className: 'recamara-luz-image'
+        },
+        'apaga la luz de la recámara': {
+          command: 'img/Foco_OFF.png',
+          className: 'recamara-luz-image'
+        },
+        'enciende la luz de la sala': {
+          command: 'img/Foco_ON.png',
+          className: 'sala-luz-image'
+        },
+        'apaga la luz de la sala': {
+          command: 'img/Foco_OFF.png',
+          className: 'sala-luz-image'
+        },
+        'enciende luces del jardín': {
+          command: 'img/gardenlamp_ON.png',
+          className: 'gardenlamp-image' // Clase específica para las gardenlamp
+        },
+        'apaga luces del jardín': {
+          command: 'img/gardenlamp_OFF.png',
+          className: 'gardenlamp-image' // Clase específica para las gardenlamp
+        },
+        'abre las cortinas': {
+          command: 'img/CortinasOPEN.png',
+          className: 'cortinas-image' // Clase específica para las cortinas
+        },
+        'cierra las cortinas': {
+          command: 'img/CortinasCLOSE.png',
+          className: 'cortinas-image' // Clase específica para las cortinas
+        },
+        'enciende las cámaras': {
+          command: 'img/Camaras_ON.png',
+          className: 'camaras-image' // Clase específica para las cámaras
+        },
+        'apaga las cámaras': {
+          command: 'img/Camaras_OFF.png',
+          className: 'camaras-image' // Clase específica para las cámaras
+        },
+        'activa la alarma': {
+          command: 'activa la alarma ',
+          className: 'alarma-image'
+        },
+        'apaga la alarma': {
+          command: 'apaga la alarma',
+          className: 'alarma-image'
+        }
+      };
+
+      for (const keyword in deviceKeywords) {
+        if (orden === keyword) {
+          const { command, className } = deviceKeywords[keyword];
+          console.log(`Se detectó la palabra clave: ${keyword}`);
+          console.log(`Comando a ejecutar: ${command}`);
+
+          const elements = document.getElementsByClassName(className);
+          for (let i = 0; i < elements.length; i++) {
+            const element = elements[i];
+            if (className === 'alarma-image') {
+              controlarAlarma(command);
+            } else {
+              element.src = command;
+            }
+          }
+          return; // Sal del bucle una vez que se ha encontrado una coincidencia
+        }
+      }
+
+      // Si no se encuentra ninguna coincidencia
+      console.log('Comando no reconocido');
+    }
+
+    function controlarAlarma(command) {
+      const alarmSound = new Audio('img/alarm.mp3');
+      if (command === 'activa la alarma') {
+        alarmSound.play();
+      } else if (command === 'apaga la alarma') {
+        alarmSound.pause();
+        alarmSound.currentTime = 0;
+      }
+    }
+  </script>
+</body>
+</html>
